@@ -1,127 +1,208 @@
-<!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Marianne ya bañate</title>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background: linear-gradient(160deg, #f8f2e9 0%, #dce8f6 100%);
-            color: #2b3340;
-        }
-
-        .container {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 32px 24px;
-        }
-
-        h1 {
-            color: #2f5d8a;
-            font-size: 2.8rem;
-            margin-bottom: 0.4em;
-            text-align: center;
-        }
-
-        h2 {
-            color: #3c5c75;
-            margin-top: 1.8em;
-            margin-bottom: 0.5em;
-        }
-
-        p {
-            font-size: 1.05rem;
-            margin-bottom: 1em;
-        }
-
-        ul, ol {
-            background: rgba(255,255,255,0.85);
-            padding: 18px 22px;
-            border-radius: 14px;
-            box-shadow: 0 8px 22px rgba(46, 60, 81, 0.12);
-        }
-
-        li {
-            margin-bottom: 0.8em;
-        }
-
-        input[type="radio"] {
-            margin: 0 0.4em 0 0;
-        }
-
-        button {
-            display: inline-block;
-            margin-top: 1em;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 999px;
-            background-color: #4a7ebb;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-
-        button:hover {
-            background-color: #376ca4;
-            transform: translateY(-1px);
-        }
-
-        hr {
-            border: none;
-            height: 1px;
-            background: rgba(0,0,0,0.12);
-            margin: 2rem 0;
-        }
-
-        strong {
-            color: #2b3340;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADMV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('descarga.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      margin: 0;
+      overflow: hidden;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      width: 350px;
+      position: relative;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .heart {
+      color: #ff4d4d;
+      font-size: 150px;
+      animation: heartbeat 1.5s infinite;
+    }
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    h2 {
+      font-size: 2.5em;
+      color: #ff4d4d;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+    p {
+      font-size: 1.2em;
+      color: #333;
+      margin: 10px 0;
+    }
+    .hidden-message,
+    .hidden-link {
+      display: none;
+      margin-top: 20px;
+    }
+    .hidden-message {
+      color: #551533;
+      font-size: 1.1em;
+      animation: slideIn 1s ease-in-out;
+    }
+    .hidden-link a {
+      color: #ff4d4d;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: bold;
+    }
+    .hidden-link a:hover {
+      text-decoration: underline;
+    }
+    button {
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 15px;
+      cursor: pointer;
+      border-radius: 25px;
+      font-size: 1em;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #e60000;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      position: relative;
+      animation: slideDown 0.5s ease-in-out;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: #333;
+    }
+    .modal-footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+</style>
 </head>
-
 <body>
-    <div class="container">
-    <h1>Marianne ya bañate</h1>
+  <div class="card">
+    <h2>PARA EL AMOR DE MI VIDA</h2>
+    <div class="heart">❤</div>
+    <p>I LOVE YOU</p>
+    <button onclick="mostrarMensaje()">Ver Mensaje</button>
+    <p class="hidden-message" id="mensaje">Mi corazon late con fuerza cada dia que pasa por ti, eres esa luz que ilumina mi mundo y la razon mas hermosa de mi existir ♡</p>
+    <p class="hidden-link" id="linkAdicional"><a href="https://youtu.be/8Jw1_QdRR88?si=shyPH2dnxjF0LIkY" target="_blank">Haz click aquí</a></p>
+    <button onclick="abrirModal('modalImagen')">Abrir Imagen</button>
+    <button onclick="abrirModal('modalBox')">Abrir Foto y Texto</button>
+  </div>
 
-    <p>Marianne ya bañate que hueles feo jijijijiji</p>
-
-    <h2>Razones para bañarte</h2>
-    <ul>
-        <li>Para oler rico.</li>
-        <li>Para sentirte fresca.</li>
-        <li>Para evitar que todos se tapen la nariz.</li>
-        <li>Para dar un buen ejemplo a la sociedad.</li>
-    </ul>
-
-    <h2>Consecuencias de no bañarte</h2>
-    <ol>
-        <li>Tus amigos se alejan.</li>
-        <li>Las plantas se marchitan.</li>
-        <li>Los perfumes se rinden.</li>
-        <li>Se activa la alerta sanitaria.</li>
-    </ol>
-
-    <h2>Encuesta importante</h2>
-
-    <p>¿Marianne debería bañarse?</p>
-
-    <input type="radio" name="banio"> Sí<br>
-    <input type="radio" name="banio"> Definitivamente sí<br>
-    <input type="radio" name="banio"> Urgentemente sí<br>
-
-    <br>
-
-    <button>Enviar respuesta</button>
-
-    <hr>
-
-    <p><b>Mensaje final:</b> Marianne, el agua no muerde.</p>
+  <!-- Modal para mostrar una imagen completa -->
+  <div id="modalImagen" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal('modalImagen')">&times;</span>
+      <img src="nosotros.jpg" alt="Imagen" style="max-width:100%; height:auto;">
+      <div class="modal-footer">
+        <button onclick="cerrarModal('modalImagen')">Regresar</button>
+      </div>
     </div>
+  </div>
+<!-- Modal para mostrar un box con foto y texto -->
+<div id="modalBox" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal('modalBox')">&times;</span>
+      <div class="box">
+        <img src="amor.jpg" alt="Foto" style="max-width:100px; float:left; margin-right: 10px;">
+        <p>No es necesario esperar
+           esperar otra vida
+           para que todo funcione, yo me hare cargo de que todo funcione 
+           en esta vida, junto a ti, contigo.
+        TE AMOOOO.</p>
+        <div style="clear:both;"></div>
+      </div>
+      <div class="modal-footer">
+        <button onclick="cerrarModal('modalBox')">Regresar</button>
+      </div>
+    </div>
+  </div>
 
+  <script>
+    function mostrarMensaje() {
+      document.getElementById('mensaje').style.display = 'block';
+      document.getElementById('linkAdicional').style.display = 'block';
+    }
+
+    function abrirModal(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+    function cerrarModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    // Cerrar el modal al hacer clic fuera del contenido
+    window.onclick = function(event) {
+      var modalImagen = document.getElementById('modalImagen');
+      var modalBox = document.getElementById('modalBox');
+      if (event.target == modalImagen) {
+        modalImagen.style.display = "none";
+      }
+      if (event.target == modalBox) {
+        modalBox.style.display = "none";
+      }
+    }
+  </script>
 </body>
 </html>
